@@ -16,6 +16,7 @@ the database depending on the comparisson result between the data. """
 # ---------------------------------------------------------------------------
 # Imports
 # ---------------------------------------------------------------------------
+#!/usr/bin/env python3
 import json
 from mysql.connector.utils import NUMERIC_TYPES
 import requests as rq
@@ -147,7 +148,7 @@ class dbScrapper():
             for c in self.tableCols:
                 k = self.dbCols[c]
                 if k in dataKeys:
-                    if str(data[k]).isnumeric() or data[k] == "null":
+                    if not str(data[k]).isalpha() and str(data[k]).isnumeric() or data[k] == "null":
                         dbEntry += f"{data[k]}"
                     else:
                         dbEntry += f"\"{data[k]}\""
@@ -155,7 +156,7 @@ class dbScrapper():
                     dbEntry += "null"
                 if c != self.apiKeys[-1]: dbEntry += ","
             dbEntry += ")"
-            #print(dbEntry)
+            print(dbEntry)
             self.dbCursor.execute(dbEntry)
             print("\t├─Checking data added succesfully... ")
         elif check[0] and check[1]:
