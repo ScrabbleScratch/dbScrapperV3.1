@@ -156,7 +156,7 @@ class dbScrapper():
                     dbEntry += "null"
                 if c != self.apiKeys[-1]: dbEntry += ","
             dbEntry += ")"
-            print(dbEntry)
+            #print(dbEntry)
             self.dbCursor.execute(dbEntry)
             print("\t├─Checking data added succesfully... ")
         elif check[0] and check[1]:
